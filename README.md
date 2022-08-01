@@ -9,7 +9,9 @@
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >=2.36.0 |
 
 ## Requirements
 
@@ -24,22 +26,62 @@ No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [azurerm_kubernetes_cluster_node_pool.node_pool](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster_node_pool) | resource |
 
 ## Inputs
 
-No inputs.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_node_pools"></a> [node\_pools](#input\_node\_pools) | Cluster Node Pool settings. | <pre>list(object({<br>    name                         = string<br>    kubernetes_cluster_id        = string<br>    vm_size                      = string<br>    mode                         = string<br>    node_labels                  = map(any)<br>    node_taints                  = list(string)<br>    zones                        = list(string)<br>    vnet_subnet_id               = string<br>    enable_auto_scaling          = bool<br>    enable_host_encryption       = bool<br>    enable_node_public_ip        = bool<br>    proximity_placement_group_id = string<br>    orchestrator_version         = string<br>    max_pods                     = number<br>    max_count                    = number<br>    min_count                    = number<br>    node_count                   = number<br>    os_disk_size_gb              = number<br>    os_disk_type                 = string<br>    os_type                      = string<br>    priority                     = string<br>    tags                         = map(any)<br>  }))</pre> | <pre>[<br>  {<br>    "enable_auto_scaling": true,<br>    "enable_host_encryption": true,<br>    "enable_node_public_ip": false,<br>    "kubernetes_cluster_id": null,<br>    "max_count": 1,<br>    "max_pods": 30,<br>    "min_count": 1,<br>    "mode": "User",<br>    "name": null,<br>    "node_count": 1,<br>    "node_labels": {<br>      "type": "worker"<br>    },<br>    "node_taints": [],<br>    "orchestrator_version": "1.21.1",<br>    "os_disk_size_gb": 128,<br>    "os_disk_type": "Ephemeral",<br>    "os_type": "Linux",<br>    "priority": "Regular",<br>    "proximity_placement_group_id": null,<br>    "tags": {<br>      "deployed by": "Terraform"<br>    },<br>    "vm_size": "Standard_F8s_v2",<br>    "vnet_subnet_id": null,<br>    "zones": [<br>      "1",<br>      "2",<br>      "3"<br>    ]<br>  }<br>]</pre> | no |
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_ids"></a> [ids](#output\_ids) | Specifies the resource id of the node pool |
 
 ## Example
 
 ```hcl
-resource "azurerm_resource_group" "this" {
-  name     = uuid()
-  location = "westeurope"
+## Find an overview about all possible values and detailed explainations at
+## https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/kubernetes_cluster_node_pool
+
+module "node_pool_central" {
+  source = "./module"
+
+  node_pools = [
+
+    {
+      enable_auto_scaling    = true
+      enable_host_encryption = true
+      enable_node_public_ip  = false
+      kubernetes_cluster_id  = "MyAksClusterId"
+      max_count              = 1
+      max_pods               = 30
+      min_count              = 1
+      mode                   = "User"
+      name                   = "MyNodePool_worker_1"
+      node_count             = 1
+      node_labels = {
+        "node" = "worker"
+      }
+      node_taints                  = []
+      orchestrator_version         = "TakeTheSameThanTheAksCluster"
+      os_disk_size_gb              = 128
+      os_disk_type                 = "Ephemeral"
+      os_type                      = "Linux"
+      priority                     = "Regular"
+      proximity_placement_group_id = null
+      tags = {
+        "deployed by" = "Terraform"
+      }
+      vm_size        = "Standard_F8s_v2"
+      vnet_subnet_id = "MyPoolSubnetId"
+      zones          = ["1", "2", "3"]
+    }
+  ]
 }
 ```
 
