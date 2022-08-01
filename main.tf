@@ -14,7 +14,7 @@ locals {
   }
 }
 
-resource "azurerm_kubernetes_cluster_node_pool" "node_pool" {
+resource "azurerm_kubernetes_cluster_node_pool" "this" {
   for_each = { for node_pool in var.node_pools : node_pool.name => node_pool }
 
   name                         = each.key

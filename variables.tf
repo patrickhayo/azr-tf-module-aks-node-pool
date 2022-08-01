@@ -26,32 +26,32 @@ variable "node_pools" {
     priority                     = string
     tags                         = map(any)
   }))
-  default = [{
-    enable_auto_scaling    = true
-    enable_host_encryption = true
-    enable_node_public_ip  = false
-    kubernetes_cluster_id  = null
-    max_count              = 1
-    max_pods               = 30
-    min_count              = 1
-    mode                   = "User"
-    name                   = null
-    node_count             = 1
-    node_labels = {
-      "type" = "worker"
-    }
-    node_taints                  = []
-    orchestrator_version         = "1.21.1"
-    os_disk_size_gb              = 128
-    os_disk_type                 = "Ephemeral"
-    os_type                      = "Linux"
-    priority                     = "Regular"
-    proximity_placement_group_id = null
-    tags = {
-      "deployed by" = "Terraform"
-    }
-    vm_size        = "Standard_F8s_v2"
-    vnet_subnet_id = null
-    zones          = ["1", "2", "3"]
-  }]
+  # default = [{
+  #   enable_auto_scaling    = true
+  #   enable_host_encryption = true
+  #   enable_node_public_ip  = false
+  #   kubernetes_cluster_id  = null
+  #   max_count              = 1
+  #   max_pods               = 30
+  #   min_count              = 1
+  #   mode                   = "User"
+  #   name                   = null
+  #   node_count             = 1
+  #   node_labels = {
+  #     "type" = "worker"
+  #   }
+  #   node_taints                  = []
+  #   orchestrator_version         = "1.21.1"
+  #   os_disk_size_gb              = 128
+  #   os_disk_type                 = "Ephemeral"
+  #   os_type                      = "Linux"
+  #   priority                     = "Regular"
+  #   proximity_placement_group_id = null
+  #   tags = {
+  #     "deployed by" = "Terraform"
+  #   }
+  #   vm_size        = "Standard_F8s_v2"
+  #   vnet_subnet_id = null
+  #   zones          = ["1", "2", "3"]
+  # }]
 }
