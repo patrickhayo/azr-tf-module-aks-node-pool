@@ -1,6 +1,6 @@
-# azr-tf-module-template
+# azr-tf-module-aks-node-pool
 
-[Terraform](https://www.terraform.io) Module to create **[NAME]** in Azure
+[Terraform](https://www.terraform.io) Module to create additional **AKS Cluster Node Pool** in Azure
 
 <!-- BEGIN_TF_DOCS -->
 ## Prerequisites
